@@ -1,0 +1,5 @@
+16651.svg		anchorGrabberTool@2x.svg
+16652.svg		anchorGrabberToolCursor@2x.svg
+16652.xml		anchorGrabberToolCursor.xml
+16653.svg		anchorGrabberToolHitCursor@2x.svg
+16653.xml		anchorGrabberToolHitCursor.xml

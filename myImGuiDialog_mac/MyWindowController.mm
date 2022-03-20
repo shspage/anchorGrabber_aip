@@ -1,220 +1,82 @@
 // Adobe Illustrator プラグイン用の設定ダイアログ。
-// Dear ImGui のサンプルコード (OSX + OpenGL2) をベースにしています。
+// Dear ImGui のサンプルコード (OSX + Metal) をベースにしています。
 // "#" を付したコメントは私のもので、それ以外の英語のはサンプルコードのものです。
 
 // # Dear ImGui : Copyright (c) 2014-2020 Omar Cornut
 // # Licensed under the MIT License
 // # https://github.com/ocornut/imgui
+#import <Cocoa/Cocoa.h>
+#import <Metal/Metal.h>
+#import <MetalKit/MetalKit.h>
 
 #include "../imgui/imgui.h"
 #include "../imgui/examples/imgui_impl_osx.h"
-#include "../imgui/examples/imgui_impl_opengl2.h"
+#include "../imgui/examples/imgui_impl_metal.h"
 #include <stdio.h>
-#import <OpenGL/gl.h>
-#import <OpenGL/glu.h>
 #import "MyWindowController.h"
 #include "../Source/myDialogConfig.h"
 
-@interface MyImGuiView : NSOpenGLView
+@interface MyImGuiView : NSViewController
 {
-    MyDialogParms* m_parms;
-    int m_result;
-    ImGuiWindowFlags m_flag;
-    std::function<void(void)> m_callbackFunc;
+    ImGuiWindowFlags _flag;
 }
--(void)setParms:(MyDialogParms*)parms;
--(void)setCallback: (std::function<void(void)>)callbackFunc;
--(int)getResult;
--(void)updateAndDrawView;
+@property (nonatomic, assign) MyDialogParms* parms;
+@property (nonatomic, assign) int result;
+@property (nonatomic, assign) std::function<void(void)> callbackFunc;
+-(void)setFlags;
+@end
+
+@interface MyImGuiView () <MTKViewDelegate>
+@property (nonatomic, readonly) MTKView *mtkView;
+@property (nonatomic, strong) id <MTLDevice> device;
+@property (nonatomic, strong) id <MTLCommandQueue> commandQueue;
 @end
 
 @implementation MyImGuiView
--(void)setParms:(MyDialogParms*)parms
+
+-(void)setFlags
 {
-    m_parms = parms;
-    m_result = 0;
-    
     // # 通常のダイアログっぽく見せるためのフラグ。
     // # 基本的に ImGui はウィンドウの中にサブウィンドウ的にダイアログを描画する。
     // # 以下のフラグはこのサブウィンドウに適用される。
     // # ref(Japanese): https://qiita.com/mizuma/items/73218dab2f6b022b0227
-    m_flag = 0;
-    m_flag |= ImGuiWindowFlags_NoTitleBar; // タイトルバーを非表示にします。
-    m_flag |= ImGuiWindowFlags_NoResize; // ウィンドウをリサイズ不可にします。
-    m_flag |= ImGuiWindowFlags_NoMove; // ウィンドウを移動不可にします。
-    m_flag |= ImGuiWindowFlags_NoScrollbar; // スクロールバーを無効にします。
-    m_flag |= ImGuiWindowFlags_NoScrollWithMouse; // マウスホイールでのスクロール操作を無効にします。
-    m_flag |= ImGuiWindowFlags_NoCollapse; // タイトルバーをダブルクリックして閉じる挙動を無効にします。
-    m_flag |= ImGuiWindowFlags_NoBackground; // ウィンドウ内の背景を非表示にします。
-    m_flag |= ImGuiWindowFlags_NoBringToFrontOnFocus; // ウィンドウをクリックしてフォーカスした際に他のウィンドウよりも前面に表示する挙動を無効にします。
-    m_flag |= ImGuiWindowFlags_NoNav; // ゲームパッドやキーボードでのUIの操作を無効にします。
-    m_flag |= ImGuiWindowFlags_NoSavedSettings; // imgui.iniでウィンドウの位置などを自動保存/ロードさせないようにします。
-    m_flag |= ImGuiWindowFlags_AlwaysAutoResize; // 自動でウィンドウ内のコンテンツに合わせてリサイズします。
-    m_flag |= ImGuiWindowFlags_NoFocusOnAppearing; // 表示/非表示の際のトランジションアニメーションを無効にします。
+    _flag = 0;
+    _flag |= ImGuiWindowFlags_NoTitleBar; // タイトルバーを非表示にします。
+    _flag |= ImGuiWindowFlags_NoResize; // ウィンドウをリサイズ不可にします。
+    _flag |= ImGuiWindowFlags_NoMove; // ウィンドウを移動不可にします。
+    _flag |= ImGuiWindowFlags_NoScrollbar; // スクロールバーを無効にします。
+    _flag |= ImGuiWindowFlags_NoScrollWithMouse; // マウスホイールでのスクロール操作を無効にします。
+    _flag |= ImGuiWindowFlags_NoCollapse; // タイトルバーをダブルクリックして閉じる挙動を無効にします。
+    _flag |= ImGuiWindowFlags_NoBackground; // ウィンドウ内の背景を非表示にします。
+    _flag |= ImGuiWindowFlags_NoBringToFrontOnFocus; // ウィンドウをクリックしてフォーカスした際に他のウィンドウよりも前面に表示する挙動を無効にします。
+    _flag |= ImGuiWindowFlags_NoNav; // ゲームパッドやキーボードでのUIの操作を無効にします。
+    _flag |= ImGuiWindowFlags_NoSavedSettings; // imgui.iniでウィンドウの位置などを自動保存/ロードさせないようにします。
+    _flag |= ImGuiWindowFlags_AlwaysAutoResize; // 自動でウィンドウ内のコンテンツに合わせてリサイズします。
+    _flag |= ImGuiWindowFlags_NoFocusOnAppearing; // 表示/非表示の際のトランジションアニメーションを無効にします。
 }
 
--(void)setCallback: (std::function<void(void)>)callbackFunc
+// --------
+-(instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil
 {
-    m_callbackFunc = callbackFunc;
-}
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 
--(int)getResult
-{
-    return m_result;
-}
+    _device = MTLCreateSystemDefaultDevice();
+    _commandQueue = [_device newCommandQueue];
 
--(void)prepareOpenGL
-{
-    [super prepareOpenGL];
-    
-#ifndef DEBUG
-    GLint swapInterval = 1;
-    [[self openGLContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
-    if (swapInterval == 0)
-        NSLog(@"Error: Cannot set swap interval.");
-#endif
-}
-
--(void)updateAndDrawView
-{
-    ImGui_ImplOpenGL2_NewFrame();
-    ImGui_ImplOSX_NewFrame(self);
-    ImGui::NewFrame();
-    
-    //static bool show_preview = true;
-    static ImVec4 clear_color = ImVec4(0.25f,0.25f,0.25f,1.0f);
-    
-    // # ダイアログの部品。流用する際の可変要素。コードはwindowsと共通。
+    if (!self.device)
     {
-        ImGui::SetNextWindowPos(ImVec2(0,0), 0, ImVec2(0,0));
-        
-        static bool is_open = true;
-        ImGui::Begin("settings", &is_open, m_flag);
-        
-        //ImGui::Text("* pixel distance settings");
-        ImGui::Text("%s", LABEL_TITLE);
-        ImGui::Spacing();
-        
-        ImGui::PushItemWidth(100);
-        
-        char buf_drag[64];
-        //sprintf(buf_drag, "drag/track (%d-%d)", (int)MIN_HIT_TOLE, (int)MAX_HIT_TOLE);
-        sprintf(buf_drag, LABEL_TOLERANCE, (int)MIN_HIT_TOLE,
-            (int)MAX_HIT_TOLE);
-        if(ImGui::InputInt(buf_drag, &(m_parms->tolerance_drag))){
-            m_parms->tolerance_drag = fmax(MIN_HIT_TOLE, fmin(MAX_HIT_TOLE, m_parms->tolerance_drag));
-            //if(show_preview) m_callbackFunc();
-        }
-        char buf_safe[64];
-        //sprintf(buf_safe, "safe click (%d-%d)", (int)MIN_SAFE_CLICK, (int)MAX_SAFE_CLICK);
-        sprintf(buf_safe, LABEL_SAFECLICK, (int)MIN_SAFE_CLICK, (int)MAX_SAFE_CLICK);
-        if(ImGui::InputInt(buf_safe, &(m_parms->tolerance_safe_click))){
-            m_parms->tolerance_safe_click = fmax(MIN_SAFE_CLICK, fmin(MAX_SAFE_CLICK, m_parms->tolerance_safe_click));
-            //if(show_preview) m_callbackFunc();
-        }
-        
-        ImGui::Spacing();
-        //if (ImGui::Button("Cancel"))
-        if (ImGui::Button(LABEL_CANCEL))
-        {
-            m_result = 1;
-        }
-        ImGui::SameLine();
-        if (ImGui::Button(LABEL_OK))
-        {
-            m_result = 2;
-        }
-
-        ImGui::End();
+        NSLog(@"Metal is not supported");
+        abort();
     }
-    // # 可変要素ここまで
-    
-    // Rendering
-    ImGui::Render();
-    [[self openGLContext] makeCurrentContext];
-    
-    ImDrawData* draw_data = ImGui::GetDrawData();
-    GLsizei width  = (GLsizei)(draw_data->DisplaySize.x * draw_data->FramebufferScale.x);
-    GLsizei height = (GLsizei)(draw_data->DisplaySize.y * draw_data->FramebufferScale.y);
-    glViewport(0, 0, width, height);
-    
-    glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-    glClear(GL_COLOR_BUFFER_BIT);
-    ImGui_ImplOpenGL2_RenderDrawData(draw_data);
-    
-    // Present
-    [[self openGLContext] flushBuffer];
-}
 
--(void)reshape
-{
-    [super reshape];
-    [[self openGLContext] update];
-    [self updateAndDrawView];
-}
-
--(void)drawRect:(NSRect)bounds
-{
-    [self updateAndDrawView];
-}
-
--(BOOL)acceptsFirstResponder { return (YES); }
--(BOOL)becomeFirstResponder  { return (YES); }
--(BOOL)resignFirstResponder  { return (YES); }
-
-// Forward Mouse/Keyboard events to dear imgui OSX back-end. It returns true when imgui is expecting to use the event.
--(void)keyUp:(NSEvent *)event           { ImGui_ImplOSX_HandleEvent(event, self); }
--(void)keyDown:(NSEvent *)event         { ImGui_ImplOSX_HandleEvent(event, self); }
--(void)flagsChanged:(NSEvent *)event    { ImGui_ImplOSX_HandleEvent(event, self); }
--(void)mouseDown:(NSEvent *)event       { ImGui_ImplOSX_HandleEvent(event, self); }
--(void)mouseUp:(NSEvent *)event         { ImGui_ImplOSX_HandleEvent(event, self); }
--(void)mouseMoved:(NSEvent *)event      { ImGui_ImplOSX_HandleEvent(event, self); }
--(void)mouseDragged:(NSEvent *)event    { ImGui_ImplOSX_HandleEvent(event, self); }
--(void)scrollWheel:(NSEvent *)event     { ImGui_ImplOSX_HandleEvent(event, self); }
-
-@end
-
-//-----------------------------------------------------------------------------------
- @implementation MyWindowController
-
-- (instancetype)initWithWindow:(NSWindow*)window;
-{
-#ifdef IS_STANDALONE
-    // # プラグインのダイアログの場合は以下は不要
-    // Make the application a foreground application (else it won't receive keyboard events)
-    ProcessSerialNumber psn = {0, kCurrentProcess};
-    TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-#endif
-
-    [window setTitle:[NSString stringWithUTF8String:kMyDialogTitle]];
-    [window setAcceptsMouseMovedEvents:YES];
-    [window setOpaque:YES];
-
-    NSOpenGLPixelFormatAttribute attrs[] =
-    {
-        NSOpenGLPFADoubleBuffer,
-        NSOpenGLPFADepthSize, 32,
-        0
-    };
-    
-    NSOpenGLPixelFormat* format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
-    MyImGuiView* imguiview = [[MyImGuiView alloc] initWithFrame:window.frame pixelFormat:format];
-    format = nil;
-    [imguiview setParms:nil];
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1070
-    if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_6)
-        [imguiview setWantsBestResolutionOpenGLSurface:YES];
-#endif // MAC_OS_X_VERSION_MAX_ALLOWED >= 1070
-    [window setContentView:imguiview];
-    
-    if ([imguiview openGLContext] == nil)
-        NSLog(@"No OpenGL Context!");
-    
     // Setup Dear ImGui context
+    // FIXME: This example doesn't have proper cleanup...
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
     io.Fonts->AddFontDefault();
 #ifdef DIALOG_LANG_JP
     ImFontConfig config;
@@ -225,14 +87,14 @@
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
+    //ImGui::StyleColorsClassic();
     ImGuiStyle* style = &ImGui::GetStyle();
     // background color of input fields
     style->Colors[ImGuiCol_FrameBg] = ImVec4(0.5f, 0.5f, 0.5f, 0.5f);
 
-    // Setup Platform/Renderer bindings
-    ImGui_ImplOSX_Init();
-    ImGui_ImplOpenGL2_Init();
-    
+    // Setup Renderer backend
+    ImGui_ImplMetal_Init(_device);
+
     // Load Fonts
     // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
     // - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple.
@@ -248,21 +110,188 @@
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != NULL);
 
+    return self;
+}
+
+-(MTKView *)mtkView
+{
+    return (MTKView *)self.view;
+}
+
+-(void)loadView
+{
+    self.view = [[MTKView alloc] initWithFrame:CGRectMake(0, 0, kMyDialogWidth, kMyDialogHeight)];
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.mtkView.device = self.device;
+    self.mtkView.delegate = self;
+
+    // Add a tracking area in order to receive mouse events whenever the mouse is within the bounds of our view
+    NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
+                                                           options:NSTrackingMouseMoved | NSTrackingInVisibleRect | NSTrackingActiveAlways
+                                                           owner:self
+                                                           userInfo:nil];
+    [self.view addTrackingArea:trackingArea];
+
+    ImGui_ImplOSX_Init(self.view);
+}
+
+-(void)drawInMTKView:(MTKView*)view
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.DisplaySize.x = view.bounds.size.width;
+    io.DisplaySize.y = view.bounds.size.height;
+
+    CGFloat framebufferScale = view.window.screen.backingScaleFactor ?: NSScreen.mainScreen.backingScaleFactor;
+    io.DisplayFramebufferScale = ImVec2(framebufferScale, framebufferScale);
+
+    io.DeltaTime = 1 / float(view.preferredFramesPerSecond ?: 60);
+
+    id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
+
+    MTLRenderPassDescriptor* renderPassDescriptor = view.currentRenderPassDescriptor;
+    if (renderPassDescriptor == nil)
+    {
+        [commandBuffer commit];
+        return;
+    }
+
+    // Start the Dear ImGui frame
+    ImGui_ImplMetal_NewFrame(renderPassDescriptor);
+    ImGui_ImplOSX_NewFrame(view);
+    ImGui::NewFrame();
+    
+    static ImVec4 clear_color = ImVec4(0.25f,0.25f,0.25f,1.0f);
+    
+    // # ダイアログの部品。流用する際の可変要素。コードはwindowsと共通。
+    {
+        ImGui::SetNextWindowPos(ImVec2(0,0), 0, ImVec2(0,0));
+        
+        static bool is_open = true;
+        ImGui::Begin("settings", &is_open, _flag);
+        
+        //ImGui::Text("* pixel distance settings");
+        ImGui::Text("%s", LABEL_TITLE);
+        ImGui::Spacing();
+        
+        ImGui::PushItemWidth(100);
+        
+        char buf_drag[64];
+        //sprintf(buf_drag, "drag/track (%d-%d)", (int)MIN_HIT_TOLE, (int)MAX_HIT_TOLE);
+        sprintf(buf_drag, LABEL_TOLERANCE, (int)MIN_HIT_TOLE,
+            (int)MAX_HIT_TOLE);
+        if(ImGui::InputInt(buf_drag, &(_parms->tolerance_drag))){
+            _parms->tolerance_drag = fmax(MIN_HIT_TOLE, fmin(MAX_HIT_TOLE, _parms->tolerance_drag));
+            //if(show_preview) callbackFunc();
+        }
+        char buf_safe[64];
+        //sprintf(buf_safe, "safe click (%d-%d)", (int)MIN_SAFE_CLICK, (int)MAX_SAFE_CLICK);
+        sprintf(buf_safe, LABEL_SAFECLICK, (int)MIN_SAFE_CLICK, (int)MAX_SAFE_CLICK);
+        if(ImGui::InputInt(buf_safe, &(_parms->tolerance_safe_click))){
+            _parms->tolerance_safe_click = fmax(MIN_SAFE_CLICK, fmin(MAX_SAFE_CLICK, _parms->tolerance_safe_click));
+            //if(show_preview) callbackFunc();
+        }
+        
+        ImGui::Spacing();
+        //if (ImGui::Button("Cancel"))
+        if (ImGui::Button(LABEL_CANCEL))
+        {
+            _result = 1;
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(LABEL_OK))
+        {
+            _result = 2;
+        }
+
+        ImGui::End();
+    }
+    // # 可変要素ここまで
+    
+    // Rendering
+    ImGui::Render();
+    ImDrawData* draw_data = ImGui::GetDrawData();
+
+    renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+    id <MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
+    [renderEncoder pushDebugGroup:@"Dear ImGui rendering"];
+    ImGui_ImplMetal_RenderDrawData(draw_data, commandBuffer, renderEncoder);
+    [renderEncoder popDebugGroup];
+    [renderEncoder endEncoding];
+
+    // Present
+    [commandBuffer presentDrawable:view.currentDrawable];
+    [commandBuffer commit];
+}
+
+- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
+}
+
+// Forward Mouse/Keyboard events to dear imgui OSX back-end. It returns true when imgui is expecting to use the event.
+-(void)mouseDown:(NSEvent *)event           { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)rightMouseDown:(NSEvent *)event      { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)otherMouseDown:(NSEvent *)event      { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)mouseUp:(NSEvent *)event             { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)rightMouseUp:(NSEvent *)event        { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)otherMouseUp:(NSEvent *)event        { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)mouseMoved:(NSEvent *)event          { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)mouseDragged:(NSEvent *)event        { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)rightMouseMoved:(NSEvent *)event     { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)rightMouseDragged:(NSEvent *)event   { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)otherMouseMoved:(NSEvent *)event     { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)otherMouseDragged:(NSEvent *)event   { ImGui_ImplOSX_HandleEvent(event, self.view); }
+-(void)scrollWheel:(NSEvent *)event         { ImGui_ImplOSX_HandleEvent(event, self.view); }
+
+- (BOOL)commitEditingAndReturnError:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    return (YES);
+}
+
+- (void)encodeWithCoder:(nonnull NSCoder *)coder {
+}
+
+@end
+
+//-----------------------------------------------------------------------------------
+ @implementation MyWindowController
+
+- (instancetype)initWithWindow:(NSWindow*)window
+{
+#ifdef IS_STANDALONE
+    // # プラグインのダイアログの場合は以下は不要
+    // Make the application a foreground application (else it won't receive keyboard events)
+    ProcessSerialNumber psn = {0, kCurrentProcess};
+    TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+#endif
+
+    [window setTitle:[NSString stringWithUTF8String:kMyDialogTitle]];
+    [window setAcceptsMouseMovedEvents:YES];
+    [window setOpaque:YES];
+
+    MyImGuiView* imguiview = [[MyImGuiView alloc] initWithNibName:nil bundle:nil];
+    imguiview.parms = nil;
+    [imguiview setFlags];
+    window.contentViewController = imguiview;
+    
     return [super initWithWindow:window];
 }
 
 - (int) runModal:(MyDialogParms*)parms completion:(std::function<void(void)>)callbackFunc
 {
     int result = 0;
-    [self.window.contentView setParms:parms];
-    [self.window.contentView setCallback:callbackFunc];
+    MyImGuiView* vcon = (MyImGuiView*)self.contentViewController;
+    vcon.result = 0;
+    vcon.parms = parms;
+    vcon.callbackFunc = callbackFunc;
     
     NSModalSession session
     = [[NSApplication sharedApplication] beginModalSessionForWindow:self.window];
     while([self.window isVisible]){
         if([NSApp runModalSession: session] != NSModalResponseContinue) break;
-        [self.window.contentView updateAndDrawView];
-        result = [self.window.contentView getResult];
+        result = vcon.result;
         if(result != 0) break;
     }
     callbackFunc();
@@ -273,9 +302,8 @@
 
 - (void) releaseDialog
 {
-    ImGui_ImplOSX_Shutdown();  // # 何もしていない
-    [self.window.contentView clearGLContext];
-    ImGui_ImplOpenGL2_Shutdown();
+    ImGui_ImplOSX_Shutdown();
+    ImGui_ImplMetal_Shutdown();
     ImGui::DestroyContext();
     [self.window close];
 }

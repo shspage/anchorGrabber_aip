@@ -19,19 +19,25 @@
 		2E2BB570245B730700F77D77 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB522245B64AB00F77D77 /* imgui_widgets.cpp */; };
 		2E2BB571245B730900F77D77 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB52C245B64AB00F77D77 /* imgui_draw.cpp */; };
 		2E2BB572245B730C00F77D77 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB526245B64AB00F77D77 /* imgui.cpp */; };
-		2E2BB575245B734800F77D77 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2BB574245B734800F77D77 /* OpenGL.framework */; };
 		2E2BB577245B734E00F77D77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2BB576245B734E00F77D77 /* Cocoa.framework */; };
 		2E2BB5BD245B988300F77D77 /* myImGuiDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2BB5BA245B988300F77D77 /* myImGuiDialog.h */; };
 		2E2BB5BE245B988300F77D77 /* myDialogConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2BB5BB245B988300F77D77 /* myDialogConfig.h */; };
-		2E2BB5C5245B992400F77D77 /* imgui_impl_opengl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5C1245B992400F77D77 /* imgui_impl_opengl2.cpp */; };
-		2E2BB5C6245B992400F77D77 /* imgui_impl_opengl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5C1245B992400F77D77 /* imgui_impl_opengl2.cpp */; };
-		2E2BB5C7245B992400F77D77 /* imgui_impl_opengl2.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2BB5C2245B992400F77D77 /* imgui_impl_opengl2.h */; };
 		2E2BB5C8245B992400F77D77 /* imgui_impl_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5C3245B992400F77D77 /* imgui_impl_osx.mm */; };
 		2E2BB5C9245B992400F77D77 /* imgui_impl_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5C3245B992400F77D77 /* imgui_impl_osx.mm */; };
 		2E2BB5CA245B992400F77D77 /* imgui_impl_osx.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2BB5C4245B992400F77D77 /* imgui_impl_osx.h */; };
 		2E2BB5D2245BB75500F77D77 /* MyWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2BB5D0245BB75500F77D77 /* MyWindowController.h */; };
 		2E2BB5D3245BB75500F77D77 /* MyWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5D1245BB75500F77D77 /* MyWindowController.mm */; };
 		2E2BB5D4245BB75500F77D77 /* MyWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5D1245BB75500F77D77 /* MyWindowController.mm */; };
+		2E341C7927E67C5A0034CAAF /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E341C7827E67C5A0034CAAF /* Metal.framework */; };
+		2E341C7B27E67C600034CAAF /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E341C7A27E67C600034CAAF /* MetalKit.framework */; };
+		2E341C7D27E67C660034CAAF /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E341C7C27E67C660034CAAF /* GameController.framework */; };
+		2E341C7F27E67C9F0034CAAF /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E341C7E27E67C9F0034CAAF /* imgui_impl_metal.mm */; };
+		2E341C8127E67CA40034CAAF /* imgui_impl_metal.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E341C8027E67CA40034CAAF /* imgui_impl_metal.h */; };
+		2E341C8227E67D270034CAAF /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E341C7E27E67C9F0034CAAF /* imgui_impl_metal.mm */; };
+		2E341C8327E67D640034CAAF /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E341C7827E67C5A0034CAAF /* Metal.framework */; };
+		2E341C8427E67D690034CAAF /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E341C7A27E67C600034CAAF /* MetalKit.framework */; };
+		2E341C8527E67D6F0034CAAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2BB576245B734E00F77D77 /* Cocoa.framework */; };
+		2E341C8627E67D750034CAAF /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E341C7C27E67C660034CAAF /* GameController.framework */; };
 		2EE32EC9257E3FAD00E88780 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EE32EC8257E3FAD00E88780 /* imgui_tables.cpp */; };
 		2EE32ECA257E3FAD00E88780 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EE32EC8257E3FAD00E88780 /* imgui_tables.cpp */; };
 		2EF78A3D257B8CF500E2B101 /* MyDialogParms.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EF78A3C257B8CF500E2B101 /* MyDialogParms.h */; };
@@ -64,12 +70,15 @@
 		2E2BB576245B734E00F77D77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2E2BB5BA245B988300F77D77 /* myImGuiDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myImGuiDialog.h; path = ../Source/myImGuiDialog.h; sourceTree = "<group>"; };
 		2E2BB5BB245B988300F77D77 /* myDialogConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myDialogConfig.h; path = ../Source/myDialogConfig.h; sourceTree = "<group>"; };
-		2E2BB5C1245B992400F77D77 /* imgui_impl_opengl2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_impl_opengl2.cpp; path = ../imgui/examples/imgui_impl_opengl2.cpp; sourceTree = "<group>"; };
-		2E2BB5C2245B992400F77D77 /* imgui_impl_opengl2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_opengl2.h; path = ../imgui/examples/imgui_impl_opengl2.h; sourceTree = "<group>"; };
 		2E2BB5C3245B992400F77D77 /* imgui_impl_osx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = imgui_impl_osx.mm; path = ../imgui/examples/imgui_impl_osx.mm; sourceTree = "<group>"; };
 		2E2BB5C4245B992400F77D77 /* imgui_impl_osx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_osx.h; path = ../imgui/examples/imgui_impl_osx.h; sourceTree = "<group>"; };
 		2E2BB5D0245BB75500F77D77 /* MyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWindowController.h; sourceTree = "<group>"; };
 		2E2BB5D1245BB75500F77D77 /* MyWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyWindowController.mm; sourceTree = "<group>"; };
+		2E341C7827E67C5A0034CAAF /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		2E341C7A27E67C600034CAAF /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		2E341C7C27E67C660034CAAF /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		2E341C7E27E67C9F0034CAAF /* imgui_impl_metal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = imgui_impl_metal.mm; path = ../imgui/examples/imgui_impl_metal.mm; sourceTree = "<group>"; };
+		2E341C8027E67CA40034CAAF /* imgui_impl_metal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_metal.h; path = ../imgui/examples/imgui_impl_metal.h; sourceTree = "<group>"; };
 		2EE32EC8257E3FAD00E88780 /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_tables.cpp; sourceTree = "<group>"; };
 		2EF78A3C257B8CF500E2B101 /* MyDialogParms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDialogParms.h; path = ../Source/MyDialogParms.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +88,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E341C8627E67D750034CAAF /* GameController.framework in Frameworks */,
+				2E341C8527E67D6F0034CAAF /* Cocoa.framework in Frameworks */,
+				2E341C8427E67D690034CAAF /* MetalKit.framework in Frameworks */,
+				2E341C8327E67D640034CAAF /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,8 +99,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E341C7D27E67C660034CAAF /* GameController.framework in Frameworks */,
 				2E2BB577245B734E00F77D77 /* Cocoa.framework in Frameworks */,
-				2E2BB575245B734800F77D77 /* OpenGL.framework in Frameworks */,
+				2E341C7B27E67C600034CAAF /* MetalKit.framework in Frameworks */,
+				2E341C7927E67C5A0034CAAF /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +161,9 @@
 		2E2BB573245B734800F77D77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E341C7C27E67C660034CAAF /* GameController.framework */,
+				2E341C7A27E67C600034CAAF /* MetalKit.framework */,
+				2E341C7827E67C5A0034CAAF /* Metal.framework */,
 				2E2BB576245B734E00F77D77 /* Cocoa.framework */,
 				2E2BB574245B734800F77D77 /* OpenGL.framework */,
 			);
@@ -155,8 +173,8 @@
 		2E2BB5C0245B990E00F77D77 /* imgui_impl */ = {
 			isa = PBXGroup;
 			children = (
-				2E2BB5C1245B992400F77D77 /* imgui_impl_opengl2.cpp */,
-				2E2BB5C2245B992400F77D77 /* imgui_impl_opengl2.h */,
+				2E341C8027E67CA40034CAAF /* imgui_impl_metal.h */,
+				2E341C7E27E67C9F0034CAAF /* imgui_impl_metal.mm */,
 				2E2BB5C4245B992400F77D77 /* imgui_impl_osx.h */,
 				2E2BB5C3245B992400F77D77 /* imgui_impl_osx.mm */,
 			);
@@ -174,9 +192,9 @@
 				2E2BB5BD245B988300F77D77 /* myImGuiDialog.h in Headers */,
 				2E2BB5D2245BB75500F77D77 /* MyWindowController.h in Headers */,
 				2E2BB5BE245B988300F77D77 /* myDialogConfig.h in Headers */,
-				2E2BB5C7245B992400F77D77 /* imgui_impl_opengl2.h in Headers */,
 				2E2BB536245B64AB00F77D77 /* imgui_internal.h in Headers */,
 				2E2BB530245B64AB00F77D77 /* imconfig.h in Headers */,
+				2E341C8127E67CA40034CAAF /* imgui_impl_metal.h in Headers */,
 				2EF78A3D257B8CF500E2B101 /* MyDialogParms.h in Headers */,
 				2E2BB5CA245B992400F77D77 /* imgui_impl_osx.h in Headers */,
 			);
@@ -282,11 +300,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2BB53A245B64AB00F77D77 /* imgui_draw.cpp in Sources */,
+				2E341C7F27E67C9F0034CAAF /* imgui_impl_metal.mm in Sources */,
 				2E2BB5C8245B992400F77D77 /* imgui_impl_osx.mm in Sources */,
 				2E2BB548245B659400F77D77 /* myImGuiDialog.mm in Sources */,
 				2E2BB535245B64AB00F77D77 /* imgui.cpp in Sources */,
 				2E2BB531245B64AB00F77D77 /* imgui_widgets.cpp in Sources */,
-				2E2BB5C5245B992400F77D77 /* imgui_impl_opengl2.cpp in Sources */,
 				2EE32EC9257E3FAD00E88780 /* imgui_tables.cpp in Sources */,
 				2E2BB5D3245BB75500F77D77 /* MyWindowController.mm in Sources */,
 			);
@@ -300,8 +318,8 @@
 				2E2BB56D245B72EE00F77D77 /* myImGuiDialog.mm in Sources */,
 				2E2BB5D4245BB75500F77D77 /* MyWindowController.mm in Sources */,
 				2E2BB570245B730700F77D77 /* imgui_widgets.cpp in Sources */,
+				2E341C8227E67D270034CAAF /* imgui_impl_metal.mm in Sources */,
 				2EE32ECA257E3FAD00E88780 /* imgui_tables.cpp in Sources */,
-				2E2BB5C6245B992400F77D77 /* imgui_impl_opengl2.cpp in Sources */,
 				2E2BB571245B730900F77D77 /* imgui_draw.cpp in Sources */,
 				2E2BB5C9245B992400F77D77 /* imgui_impl_osx.mm in Sources */,
 				2E2BB572245B730C00F77D77 /* imgui.cpp in Sources */,

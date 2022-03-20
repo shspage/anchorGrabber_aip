@@ -28,8 +28,8 @@ int main(int argc, const char * argv[]) {
     MyClass* cl = new MyClass();
     std::function<void(void)> cbfunc = std::bind(&MyClass::callbackFunc, cl);
     
-    myImGuiDialog::runModal(cl->getParms(), cbfunc);
+    int result = myImGuiDialog::runModal(cl->getParms(), cbfunc);
     
-    std::cout << "end" << std::endl;
+    std::cout << "end:" << result << std::endl;
     return 0;
 }

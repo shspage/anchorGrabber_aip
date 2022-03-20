@@ -42,6 +42,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
+         BundleIdentifier = "com.adobe.illustrator"
          FilePath = "/Applications/Adobe Illustrator 2022/Adobe Illustrator.app">
       </PathRunnable>
    </LaunchAction>

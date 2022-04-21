@@ -1,11 +1,5 @@
 
-#include "../imgui/imgui.h"
-#include "../imgui/examples/imgui_impl_osx.h"
-#include "../imgui/examples/imgui_impl_opengl2.h"
-#include <stdio.h>
 #import <Cocoa/Cocoa.h>
-#import <OpenGL/gl.h>
-#import <OpenGL/glu.h>
 #include "../Source/myImGuiDialog.h"
 #include "../Source/myDialogConfig.h"
 #import "MyWindowController.h"

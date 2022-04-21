@@ -34,7 +34,8 @@ Adobe Illustrator 2022 (macOS (Apple Silicon))
 ## 開発環境
 
 Adobe Illustrator 2022 SDK  
-Xcode 12.5.1 / macOS 11.3 sdk / MacOS Big Sur  
+Xcode 13.3.1 / macOS 12.3 sdk / MacOS Monterey 12.3.1  
+<!-- Xcode 12.5.1 / macOS 11.3 sdk / MacOS Big Sur -->
 MacBook Air (M1)
 
 <!-- Visual Studio 2017 / Windows10 -->

@@ -6,6 +6,7 @@ __anchorGrabber.aip__ は、Adobe Illustrator 2022 (mac) プラグインです�
 
 設定ダイアログに [Dear ImGui](https://github.com/ocornut/imgui) を使用しています。
 
+未解決のバグあり（下記参照）
 
 ## 使い方
 
@@ -57,6 +58,9 @@ SHFXRegularPolygon.sln でソリューションのビルドを実行してくだ
 <!-- ソースコードは https://github.com/shspage/anchorGrabber_aip にあります。ビルドする際は以下をご一読ください。-->
 * anchorGrabber_aip フォルダはIllustrator SDKのsamplecodeフォルダの直下に置いてください。
 <!-- * (Windows) 添付のプロジェクトファイルでビルドするには、ソースコード(.cpp, .h, .hpp)の文字コードをUTF-8からMultibyte(cp932)に変換する必要があります。 -->
+
+## 未解決のバグ
+* プラグインの設定ウィンドウを開いた後に、Illustratorの環境設定ウィンドウを開くと、Illustratorが落ちます。
 
 ## インストール
 

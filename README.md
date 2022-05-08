@@ -8,6 +8,8 @@ You can move anchors close to the position where you started dragging together.
 
 This plug-in uses Dear ImGui (https://github.com/ocornut/imgui) for the settings dialog.
 
+There are unresolved bugs (see the section "Unresolved bugs")
+
 ## How To Use
 
 ![image](https://gist.github.com/shspage/5e54612b4b46ee946327a4436ad2f410/raw/b789c544524a2cd49c68a815210f480678fc89d8/anchorgrabber.png)  
@@ -58,6 +60,8 @@ Projects will be built in the order of _myImGuiDailog_win_ and _SHFXRegularPolyg
 * Place "anchorGrabber_aip" folder directly under Illustrator SDK's samplecode folder.
 <!-- * (Windows) To build with the attached project file, it is necessary to convert the character code of the source code (.cpp, .h, .hpp) from UTF-8 to Multibyte(cp932). -->
 
+## Unresolved bugs
+* If you open the Illustrator Preferences window after opening the plug-in settings window, Illustrator will crash.
 
 ## Installation
 

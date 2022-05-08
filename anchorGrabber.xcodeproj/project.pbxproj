@@ -314,7 +314,7 @@
 					"$(PROJECT_DIR)/lib/mac/$(AI_CONFIGURATION)",
 				);
 				MARKETING_VERSION = "anchorGrabber version $(VERSION_STRING)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-L./lib/mac/$(AI_CONFIGURATION)",
 					"-lmyImGuiDialog",
@@ -334,7 +334,7 @@
 					"$(PROJECT_DIR)/lib/mac/$(AI_CONFIGURATION)",
 				);
 				MARKETING_VERSION = "anchorGrabber version $(VERSION_STRING)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-L./lib/mac/$(AI_CONFIGURATION)",
 					"-lmyImGuiDialog",

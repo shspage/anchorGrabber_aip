@@ -306,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A190BBD225E3F5FB0001DF18 /* AIPluginCommon.xcconfig */;
 			buildSettings = {
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = debug;
 		};
@@ -313,6 +314,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A190BBD225E3F5FB0001DF18 /* AIPluginCommon.xcconfig */;
 			buildSettings = {
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = release;
 		};
@@ -326,12 +328,12 @@
 					"$(PROJECT_DIR)/lib/mac/$(AI_CONFIGURATION)",
 				);
 				MARKETING_VERSION = "anchorGrabber version $(VERSION_STRING)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-L./lib/mac/$(AI_CONFIGURATION)",
 					"-lmyImGuiDialog",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kSDKDefAIBundlePrefix.plugins.anchorGrabber;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.illustrator.plugins.anchorGrabber;
 				VERSION_STRING = 1.2.0.0;
 			};
 			name = debug;
@@ -346,12 +348,12 @@
 					"$(PROJECT_DIR)/lib/mac/$(AI_CONFIGURATION)",
 				);
 				MARKETING_VERSION = "anchorGrabber version $(VERSION_STRING)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-L./lib/mac/$(AI_CONFIGURATION)",
 					"-lmyImGuiDialog",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kSDKDefAIBundlePrefix.plugins.anchorGrabber;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.illustrator.plugins.anchorGrabber;
 				VERSION_STRING = 1.2.0.0;
 			};
 			name = release;

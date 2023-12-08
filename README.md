@@ -10,7 +10,7 @@ This plug-in uses Dear ImGui (https://github.com/ocornut/imgui) for the settings
 
 ## How To Use
 
-![image](https://gist.github.com/shspage/5e54612b4b46ee946327a4436ad2f410/raw/b789c544524a2cd49c68a815210f480678fc89d8/anchorgrabber.png)  
+![image](https://gist.githubusercontent.com/shspage/5e54612b4b46ee946327a4436ad2f410/raw/b789c544524a2cd49c68a815210f480678fc89d8/anchorgrabber.png)  
 video - 
 https://twitter.com/shspage/status/1502867048992423937
 

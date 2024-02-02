@@ -16,12 +16,12 @@
 #define kMyVerinfoBetaString ""
 
 #define kMyVerinfoOriginalFilename "anchorGrabber.aip"
-#define kMyVerinfoFileDescription "Adobe Illustrator 2020 plug-in tool"
+#define kMyVerinfoFileDescription "Adobe Illustrator 2022 plug-in tool"
 
 
 // --------
 // rarely need to modify stuffs
-#define kMyVerinfoLegalCopyright "Copyright 2020 Hiroyuki Sato, All rights reserved."
+#define kMyVerinfoLegalCopyright "Copyright 2022 Hiroyuki Sato, All rights reserved."
 
 #define kMyVerinfoURL "http://github.com/shspage"
 #define kMyVerinfoCompanyName ", " kMyVerinfoURL

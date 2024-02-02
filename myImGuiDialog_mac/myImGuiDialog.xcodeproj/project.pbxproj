@@ -32,6 +32,7 @@
 		2E2BB5D2245BB75500F77D77 /* MyWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E2BB5D0245BB75500F77D77 /* MyWindowController.h */; };
 		2E2BB5D3245BB75500F77D77 /* MyWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5D1245BB75500F77D77 /* MyWindowController.mm */; };
 		2E2BB5D4245BB75500F77D77 /* MyWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BB5D1245BB75500F77D77 /* MyWindowController.mm */; };
+		2E83A2F92B6CFF4B004E36DE /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E83A2F82B6CFF4B004E36DE /* GameController.framework */; };
 		2EE32EC9257E3FAD00E88780 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EE32EC8257E3FAD00E88780 /* imgui_tables.cpp */; };
 		2EE32ECA257E3FAD00E88780 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EE32EC8257E3FAD00E88780 /* imgui_tables.cpp */; };
 		2EF78A3D257B8CF500E2B101 /* MyDialogParms.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EF78A3C257B8CF500E2B101 /* MyDialogParms.h */; };
@@ -70,6 +71,7 @@
 		2E2BB5C4245B992400F77D77 /* imgui_impl_osx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_osx.h; path = ../imgui/examples/imgui_impl_osx.h; sourceTree = "<group>"; };
 		2E2BB5D0245BB75500F77D77 /* MyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWindowController.h; sourceTree = "<group>"; };
 		2E2BB5D1245BB75500F77D77 /* MyWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyWindowController.mm; sourceTree = "<group>"; };
+		2E83A2F82B6CFF4B004E36DE /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		2EE32EC8257E3FAD00E88780 /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_tables.cpp; sourceTree = "<group>"; };
 		2EF78A3C257B8CF500E2B101 /* MyDialogParms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDialogParms.h; path = ../Source/MyDialogParms.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E83A2F92B6CFF4B004E36DE /* GameController.framework in Frameworks */,
 				2E2BB577245B734E00F77D77 /* Cocoa.framework in Frameworks */,
 				2E2BB575245B734800F77D77 /* OpenGL.framework in Frameworks */,
 			);
@@ -146,6 +149,7 @@
 		2E2BB573245B734800F77D77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E83A2F82B6CFF4B004E36DE /* GameController.framework */,
 				2E2BB576245B734E00F77D77 /* Cocoa.framework */,
 				2E2BB574245B734800F77D77 /* OpenGL.framework */,
 			);

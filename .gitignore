@@ -1,24 +1,35 @@
-# Adobe Illustrator SDK / Xcode
+# Adobe Illustrator SDK / Xcode / Visual Studio
 
 # Template ----
 ReadMe.txt
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
-Resources/Win
+#*.vcxproj
+#*.vcxproj.filters
+#*.vcxproj.user
+#Resources/Win
 
 # IllustratorSDK ----
 plugin.pipl
 *.aip
 *.zxp
+*.log
 
 *.a
+
+# imgui ----
+imgui.ini
 
 # Xcode ----
 *.build/
 XCBuildData/
 xcuserdata/
 build/
+
+# Visual Studio ----
+*.pdb
+Debug/
+x64/
+.vs/
+Resources/Win/RCa*
 
 # windows ----
 Thumbs.db
@@ -43,4 +54,4 @@ _backup/
 *コピー*
 *.bak
 *.py
-
+*.pyc

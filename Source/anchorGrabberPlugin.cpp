@@ -171,8 +171,14 @@ ASErr anchorGrabberPlugin::EditTool(AIToolMessage* message){
 
     std::function<void(void)> getCallback = std::bind(&anchorGrabberPlugin::callbackFunc, this);
 
+#ifdef __APPLE__
     int dialogResult = myImGuiDialog::runModal(&tmpParms, getCallback);
-    
+#else
+	AIWindowRef hwnd;
+	error = sAIAppContext->GetPlatformAppWindow(&hwnd);
+	int dialogResult = myImGuiDialog::runModal(hwnd, &tmpParms, getCallback);
+#endif
+
     if (dialogResult == 2) {
         gparms.tolerance_drag = tmpParms.tolerance_drag;
         gparms.tolerance_safe_click = tmpParms.tolerance_safe_click;

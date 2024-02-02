@@ -3,7 +3,7 @@
 
 /* ダイアログの表示を日本語にする場合、以下をアンコメントしてください。
  If you want the dialog to be displayed in Japanese, please uncomment the following. */
-//#define DIALOG_LANG_JP
+// #define DIALOG_LANG_JP
 
 struct MyDialogParms {
     int tolerance_drag;
@@ -24,8 +24,13 @@ static const char* LABEL_TOLERANCE = "アンカーを捕らえる範囲 (%d-%d)"
 static const char* LABEL_SAFECLICK = "移動を無視する距離 (%d-%d)";
 static const char* LABEL_CANCEL = "キャンセル";
 static const char* LABEL_OK = "  OK  ";
-static const char* FONT_NAME_JP = "/System/Library/Fonts/ヒラギノ丸ゴ ProN W4.ttc";
+#ifdef __APPLE__
+static const char* FONT_NAME_JP = "/System/Library/Fonts/ヒラギノ丸ゴ ProN W4.ttc";
 static const float FONT_SIZE_JP = 12.0f;
+#else
+static const char* FONT_NAME_JP = "C:\\windows\\fonts\\meiryo.ttc";
+static const float FONT_SIZE_JP = 18.0f;
+#endif
 #else
 static const char* LABEL_TITLE = "* pixel distance settings";
 static const char* LABEL_TOLERANCE = "to grab anchors (%d-%d)";

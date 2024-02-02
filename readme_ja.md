@@ -1,6 +1,6 @@
 # anchorGrabber.aip
 
-__anchorGrabber.aip__ は、Adobe Illustrator 2022 (mac) プラグインです。
+__anchorGrabber.aip__ は、Adobe Illustrator 2024 (mac/win) プラグインです。
 
 ドラッグを開始した位置に近いアンカーをまとめて移動することができます。
 
@@ -26,18 +26,17 @@ https://twitter.com/shspage/status/1502867048992423937
 
 ## 動作環境：
 
-Adobe Illustrator 2022 (macOS (Apple Silicon))
+Adobe Illustrator 2024 (macOS (Apple Silicon) / Windows)
 
-<!-- Windows10 (win版) -->
 
 
 ## 開発環境
 
-Adobe Illustrator 2022 SDK  
-Xcode 12.5.1 / macOS 11.3 sdk / MacOS Big Sur  
+Adobe Illustrator 2024 SDK  
+Xcode 14.2 / MacOS Ventura  
 MacBook Air (M1)
 
-<!-- Visual Studio 2017 / Windows10 -->
+Visual Studio 2017 / Windows10
 
 
 ## ビルド
@@ -48,14 +47,17 @@ myImGuiDialog_mac/myImGuiDialog.xcodeproj で libmyImGuiDialog.a をビルドし
 anchorGrabber.xcodeproj で anchorGrabber.aip をビルドしてください。
 
 
-<!-- ### Windows
+### Windows
 
-SHFXRegularPolygon.sln でソリューションのビルドを実行してください。myImGuiDailog_win、SHFXRegularPolygon の順でプロジェクトがビルドされます。 -->
+anchorGrabber.sln でソリューションのビルドを実行してください。myImGuiDailog_win、anchorGrabber の順でプロジェクトがビルドされます。
 
 ## 補足（ビルド）
+
 <!-- ソースコードは https://github.com/shspage/anchorGrabber_aip にあります。ビルドする際は以下をご一読ください。-->
 * anchorGrabber_aip フォルダはIllustrator SDKのsamplecodeフォルダの直下に置いてください。
-<!-- * (Windows) 添付のプロジェクトファイルでビルドするには、ソースコード(.cpp, .h, .hpp)の文字コードをUTF-8からMultibyte(cp932)に変換する必要があります。 -->
+
+* (Windows) ソースの文字コードはUTF-8 (BOMなし) の設定です。(clone/download 後の変換は不要だと思います。）
+
 
 ## インストール
 

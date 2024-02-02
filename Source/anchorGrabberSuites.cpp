@@ -25,5 +25,5 @@ ImportSuite gImportSuites[] =
     kAIHitTestSuite, kAIHitTestSuiteVersion, &sAIHitTest,
     kAIDocumentViewSuite, kAIDocumentViewSuiteVersion, &sAIDocumentView,
     kAIMatchingArtSuite, kAIMatchingArtSuiteVersion, &sAIMatchingArt,
-	nil, 0, nil
+	nullptr, 0, nullptr
 };

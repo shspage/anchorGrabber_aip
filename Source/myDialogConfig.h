@@ -1,7 +1,7 @@
 #ifndef MyDialogConfig_h
 #define MyDialogConfig_h
 
-static const float kMyDialogWidth = 310.0f;
+static const float kMyDialogWidth = 320.0f;
 
 #ifdef __APPLE__
 static const float kMyDialogHeight = 120.0f;

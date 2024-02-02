@@ -2,7 +2,7 @@
 
 [readme in japanese](https://github.com/shspage/anchorGrabber_aip/blob/master/readme_ja.md)
 
-__anchorGrabber.aip__  is a plug-in for Adobe Illustrator 2022 (mac).
+__anchorGrabber.aip__  is a plug-in for Adobe Illustrator 2024 (mac/win).
 
 You can move anchors close to the position where you started dragging together.
 
@@ -25,18 +25,16 @@ Double-click the tool icon to display the "__pixel distance settings__" dialog.
 
 ## Working Environment
 
-Adobe Illustrator 2022 (macOS (Apple Silicon))
-
-<!-- Windows10 (win version) -->
+Adobe Illustrator 2024 (macOS (Apple Silicon) / Windows)
 
 
 ## Development Environment
 
-Adobe Illustrator 2022 SDK  
-Xcode 12.5.1 / macOS 11.3 sdk / MacOS Big Sur  
+Adobe Illustrator 2024 SDK  
+Xcode 14.2 / MacOS Ventura  
 MacBook Air (M1)
 
-<!-- Visual Studio 2017 / Windows10 -->
+Visual Studio 2017 / Windows10
 
 
 ## Build
@@ -46,16 +44,16 @@ MacBook Air (M1)
 Open _myImGuiDialog_mac/myImGuiDialog.xcodeproj_ and build _libmyImGuiDialog.a_ first.
 Then open _anchorGrabber.xcodeproj_ and build _anchorGrabber.aip_
 
-<!-- ### Windows
 
-Open _SHFXRegularPolygon.sln_ and build solution.  
-Projects will be built in the order of _myImGuiDailog_win_ and _SHFXRegularPolygon_ . -->
+### Windows
+
+Open _anchorGrabber.sln_ and build solution.  
+Projects will be built in the order of _myImGuiDailog_win_ and _anchorGrabber_ .
 
 
 ## Note For Build
 
 * Place "anchorGrabber_aip" folder directly under Illustrator SDK's samplecode folder.
-<!-- * (Windows) To build with the attached project file, it is necessary to convert the character code of the source code (.cpp, .h, .hpp) from UTF-8 to Multibyte(cp932). -->
 
 
 ## Installation

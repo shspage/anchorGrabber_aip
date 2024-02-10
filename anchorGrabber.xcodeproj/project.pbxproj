@@ -324,7 +324,7 @@
 					"-lmyImGuiDialog",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kSDKDefAIBundlePrefix.plugins.anchorGrabber;
-				VERSION_STRING = 1.2.0.0;
+				VERSION_STRING = 1.2.0.1;
 			};
 			name = debug;
 		};
@@ -344,7 +344,7 @@
 					"-lmyImGuiDialog",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kSDKDefAIBundlePrefix.plugins.anchorGrabber;
-				VERSION_STRING = 1.2.0.0;
+				VERSION_STRING = 1.2.0.1;
 			};
 			name = release;
 		};

@@ -10,9 +10,9 @@
 // -----------------------
 // Version Info
 #define kMyVerinfoMajorVersion 1
-#define kMyVerinfoMinorVersion 1
+#define kMyVerinfoMinorVersion 2
 #define kMyVerinfoRevisionVersion 0
-#define kMyVerinfoBuildNumber 0
+#define kMyVerinfoBuildNumber 1
 #define kMyVerinfoBetaString ""
 
 #define kMyVerinfoOriginalFilename "anchorGrabber.aip"

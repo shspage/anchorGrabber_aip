@@ -281,7 +281,7 @@
     }
     callbackFunc();
     [NSApp endModalSession:session];
-    if(result != 0) [self.window performClose:nil];
+    //if(result != 0) [self.window performClose:nil];
     return result;
 }
 

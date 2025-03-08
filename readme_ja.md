@@ -1,6 +1,6 @@
 # anchorGrabber.aip
 
-__anchorGrabber.aip__ は、Adobe Illustrator 2024 (mac/win) プラグインです。
+__anchorGrabber.aip__ は、Adobe Illustrator 2025 (mac/win) プラグインです。
 
 ドラッグを開始した位置に近いアンカーをまとめて移動することができます。
 
@@ -26,17 +26,17 @@ https://twitter.com/shspage/status/1502867048992423937
 
 ## 動作環境：
 
-Adobe Illustrator 2024 (macOS (Apple Silicon) / Windows)
+Adobe Illustrator 2025 (macOS (Apple Silicon) / Windows)
 
 
 
 ## 開発環境
 
-Adobe Illustrator 2024 SDK  
+Adobe Illustrator 2025 SDK  
 Xcode 14.2 / MacOS Ventura  
 MacBook Air (M1)
 
-Visual Studio 2017 / Windows10
+Visual Studio 2022 / Windows11
 
 
 ## ビルド
@@ -58,6 +58,8 @@ anchorGrabber.sln でソリューションのビルドを実行してくださ�
 
 * (Windows) ソースの文字コードはUTF-8 (BOMなし) の設定です。(clone/download 後の変換は不要だと思います。）
 
+* Build Phases/Run Script(mac), ビルドイベント(win) のpythonの名称やパスは私の環境でのものなので適宜変更してください。
+（Illustrator SDK 2025から、ビルドで使用するpythonのバージョンが3.11になりました。）
 
 ## インストール
 
@@ -77,12 +79,12 @@ https://github.com/shspage
 
 以下については、それぞれのライセンスを参照ください。
 
-* Dear ImGui : Copyright (c) 2014-2020 Omar Cornut  
+* Dear ImGui : Copyright (c) 2014-2025 Omar Cornut  
 Licensed under the MIT License  
 https://github.com/ocornut/imgui
 
-* Adobe Illustrator 2022 SDK  
-Copyright (c) 2022 Adobe. All rights reserved.  
+* Adobe Illustrator 2025 SDK  
+Copyright (c) 2024 Adobe. All rights reserved.  
 https://www.adobe.io/
 
 

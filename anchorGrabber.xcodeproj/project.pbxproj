@@ -255,7 +255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "python ../../tools/pipl/create_pipl.py -input '[{\"name\":\"anchorGrabber\"}, {\"entry_point\" : \"PluginMain\"}]' \n";
+			shellScript = "python3 ../../tools/pipl/create_pipl.py -input '[{\"name\":\"anchorGrabber\"}, {\"entry_point\" : \"PluginMain\"}]' \n";
 		};
 		FDD9160B21AC09BC0018B958 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

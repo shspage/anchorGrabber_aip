@@ -341,7 +341,7 @@ python ..\..\tools\pipl\create_pipl.py -input "[{\"name\":\"anchorGrabber\"}]" <
     </Link>
     <PreBuildEvent>
       <Command>echo   performing: python ..\..\tools\pipl\create_pipl.py -input "[{\"name\":\"anchorGrabber\"}]"
-C:\Python27\python.exe ..\..\tools\pipl\create_pipl.py -input "[{\"name\":\"anchorGrabber\"}]" </Command>
+C:\Python311\python.exe ..\..\tools\pipl\create_pipl.py -input "[{\"name\":\"anchorGrabber\"}]" </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
